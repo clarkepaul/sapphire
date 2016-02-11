@@ -781,6 +781,7 @@ body.cms {
 	z-index: 999;
 	border-top: 1px solid $color-light-separator;
 	height: 28px;
+	max-height: 28px;
 	background-color: $tab-panel-texture-color;
 }
 
@@ -1531,7 +1532,7 @@ form.member-profile-form {
 	overflow: hidden;
 	.cms-panel-toggle {
 		&.south {
-			border-top: 1px solid darken($color-light-separator, 15%);
+			border-top: 1px solid $color-light-separator;
 			position: absolute;
 			bottom: 0;
 			width:100%;
@@ -1539,12 +1540,12 @@ form.member-profile-form {
 		a {
 			display: block;
 			text-align: right;
-			padding: $grid-y/2 0;
+			padding: $grid-y * 2 0;
 			width: 100%;
 			text-decoration: none;
 			span {
 				display: inline-block;
-				margin: 0 5px;
+				margin: 0 8px;
 				color: #555d60;
 				font-size: 16px;
 			}
@@ -1562,6 +1563,8 @@ form.member-profile-form {
 	 * Use .cms-content-filters instead.
 	 */
 	&.cms-content-tools .cms-panel-toggle {
+		height: 52px;
+
 		&.south {
 			border-top: 1px solid $color-light-separator;
 		}
@@ -1595,11 +1598,11 @@ form.member-profile-form {
 				@include rotate(270deg);
 			}
 			.cms-panel-header {
-			width: 600px;
-			position:relative;
-			top:24px;
-			right:577px;
-			text-align:right;
+				width: 600px;
+				position: relative;
+				top: 24px;
+				right: 577px;
+				text-align: right;
 			}
 		}
 	}
@@ -1614,13 +1617,15 @@ form.member-profile-form {
 			@include transform-origin(bottom, right);
 			@include rotate(270deg);
 		}
+
 		.cms-panel-header {
 			width: 600px;
-			position:relative;
-			right:577px;
-			text-align:right;
-			border-bottom:none;
-			box-shadow:none;
+			position: relative;
+			right: 574px;
+			text-align: right;
+			border-bottom: none;
+			box-shadow: none;
+			margin-top: -5px;
 		}
 	}
 

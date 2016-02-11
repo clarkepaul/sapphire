@@ -127,11 +127,7 @@ class CompositeField extends FormField {
 	 * @deprecated
 	 */
 	public function extraClasses() {
-		Deprecation::notice('4.0', 'Use extraClass() instead');
-		return $this->extraClass();
-	}
-
-	public function extraClass() {
+		Deprecation::notice('4.0', 'Use extraClass() instead');		
 		$classes = array('field', 'CompositeField', parent::extraClass());
 		if($this->columnCount) $classes[] = 'multicolumn';
 

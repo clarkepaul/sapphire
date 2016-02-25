@@ -17,6 +17,10 @@ $color-theme-bg: 	lighten($color-theme-base, 5%);
 $color-theme-icons: darken($color-theme-base, 26%);
 $color-theme-active: $color-theme-base;
 
+// CMS 4 menu
+$base-menu: #d8e4eb;
+$base-menu-bg: lighten($base-menu,5%);
+$base-menu-icon: darken($base-menu, 26%);
 
 //offical silverstripe brand color
 $color-brand-bg: #005a93 !default;

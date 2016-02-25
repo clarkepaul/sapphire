@@ -516,11 +516,11 @@ body.cms {
 			top: 0;
 			float: left;
 			margin-top: 0;
-			
+
 			&:active {
 				outline: none;
 			}
-		
+
 			a {
 				@include inline-block;
 				outline: none;
@@ -1642,12 +1642,11 @@ form.member-profile-form {
 		display: none;  /* To be shown by javascript, see LeftAndMain.Panel.js */
 	}
 	.collapsed-flyout {
-		display: block !important;
-		left: 41px;
-		margin-top: -40px;
+		left: 59px;
+		margin-top: -52px;
 		position: fixed;
 		width: 191px;
-
+		z-index:1;
 		li a span {
 		   display: block !important;
 		}
@@ -1901,7 +1900,7 @@ body.cms-dialog {
 
 	.ss-insert-media, .ss-insert-link {
 		padding: $grid-y*1.5 $grid-x*2;
-		
+
 		.ui-tabs-panel {
 			padding: 0;
 		}
@@ -1909,7 +1908,7 @@ body.cms-dialog {
 
 	.Actions {
 		padding:$grid-y $grid-x*2 ;
-		
+
 		.ui-tabs-panel {
 			padding: 0;
 		}

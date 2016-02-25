@@ -230,7 +230,7 @@
 			font-size: $font-base-size;
 			color: $color-text-dark;
 			padding: (2 * $grid-y + 1) 5px (2 * $grid-y + 1) 8px;
-			background-color: $color-theme-bg;
+			background-color: $base-menu-bg;
 			cursor: pointer;
 			position: relative;
 			transition: padding .2s;
@@ -239,13 +239,13 @@
 
 			&:hover {
 				text-decoration: none;
-				background-color: $color-theme-active;
+				background-color: $base-menu;
 				color: darken($color-text-dark, 5%);
 			}
 
 			&:focus,
 			&:active {
-				background-color: $color-theme-active;
+				background-color: $base-menu;
 				text-decoration: none;
 			}
 
@@ -288,8 +288,9 @@
 		}
 
 		&.current { //need to apply current stlye to flyout also (at least line height)
-			a {
-				background-color: $color-theme-active;
+
+			&>a {
+				background-color: $base-menu;
 
 				.toggle-children {
 					.toggle-children-icon {
@@ -307,48 +308,19 @@
 			ul {
 				border-top: none;
 				display: block;
+
+
 			}
 
 			li {
-				background-color: darken($color-menu-button, 10%);
+				background-color: $base-menu-bg;
 				a {
-					font-size: $font-base-size - 1;
-					padding: 0 10px 0 40px;
-					height: 32px;
-					line-height: 32px;
-					color: lighten($color-menu-button, 45%);
-				 	background: none;
-					border-top: 1px solid darken($color-menu-button,4%);
-					border-bottom: 1px solid darken($color-menu-button, 20%);
-
-					&.current,
+					&:focus,
 					&:hover {
-						background: darken($color-menu-button, 5%);
-						border-top: 1px solid darken($color-menu-button, 5%);
-						color: $color-text-light;
-					}
-
-					&:focus {
-						background: darken($color-menu-button, 15%);
-						border-top: 1px solid darken($color-menu-button, 20%);
-						color: lighten($color-menu-button, 60%);
-					}
-
-				}
-
-				&.current {
-					background: darken($color-menu-button, 5%);
-					border-top: 1px solid darken($color-menu-button, 5%);
-					border-top: none;
-					a {
-						font-weight: bold;
-						color: $color-text-light;
+						background-color: $base-menu;
 					}
 				}
 
-				&.first a {
-					border-top: none;
-				}
 			}
 		}
 
@@ -371,18 +343,22 @@
 
 			li {
 				a {
+					background: $base-menu-bg;
+					box-shadow: none;
 					font-size: $font-base-size - 1;
-					padding: 0 10px 0 16px;
-					height: 32px;
-					line-height: 32px;
+					padding: 10px 0;
+					height: 20px;
+					line-height: 20px;
+
+					&:hover,
+					&:active {
+						background: $base-menu;
+					}
 				}
 
 				&.current a {
 					font-weight: bold;
-				}
-
-				&.first a {
-					border-top: 1px solid darken($color-base, 10%);
+					background-color: $base-menu;
 				}
 			}
 		}
@@ -398,5 +374,25 @@
 		li > li {
 			display: none;
 		}
+		.opened {
+			ul.collapsed-flyout {
+				border-radius: 0px 2px 2px 0px ;
+				border: 1px solid #d2d5d8;
+				@include box-shadow( 0px 0px 10px rgba(0, 0, 0, 0.2));
+
+				li {
+					&.clone {
+						a {
+							padding: 15px 0 15px 70px;
+							margin-left: -60px;
+							margin-right: 0px;
+							@include box-shadow( 0px 0px 10px rgba(0, 0, 0, 0.2));
+
+						}
+					}
+				}
+			}
+		}
 	}
+
 }

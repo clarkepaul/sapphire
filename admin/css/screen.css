@@ -851,7 +851,7 @@ form.member-profile-form #Permissions .optionset li { float: none; width: auto; 
 .cms-panel .cms-panel-content-collapsed h2, .cms-panel .cms-panel-content-collapsed h3 { border-bottom: 0; margin-left: 8px; -moz-transform-origin: bottom right; -ms-transform-origin: bottom right; -webkit-transform-origin: bottom right; transform-origin: bottom right; -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -webkit-transform: rotate(270deg); transform: rotate(270deg); }
 .cms-panel .cms-panel-content-collapsed .cms-panel-header { width: 600px; position: relative; right: 574px; text-align: right; border-bottom: none; box-shadow: none; margin-top: -5px; }
 .cms-panel .child-flyout-indicator { width: 0; height: 0; border-right: 3px dashed #1f1f1f; border-top: 3px solid transparent; border-left: 3px solid transparent; border-bottom: 3px dashed #1f1f1f; position: absolute; right: 1px; margin-top: -8px; display: none; /* To be shown by javascript, see LeftAndMain.Panel.js */ }
-.cms-panel .collapsed-flyout { display: block !important; left: 41px; margin-top: -40px; position: fixed; width: 191px; }
+.cms-panel .collapsed-flyout { left: 59px; margin-top: -52px; position: fixed; width: 191px; z-index: 1; }
 .cms-panel .collapsed-flyout li a span { display: block !important; }
 
 .cms .cms-panel-padded { padding: 0 16px 12px; }
@@ -1210,25 +1210,22 @@ li.class-ErrorPage > a .jstree-pageicon { background-position: 0 -112px; }
 .cms-menu-list li a .toggle-children { display: inline-block; float: right; width: 20px; height: 100%; cursor: pointer; }
 .cms-menu-list li a .toggle-children .toggle-children-icon { display: inline-block; width: 8px; height: 8px; background: url('../images/sprites-32x32-s47450c5f5b.png') 0 -798px no-repeat; vertical-align: middle; }
 .cms-menu-list li a .toggle-children.opened .toggle-children-icon { background: url('../images/sprites-32x32-s47450c5f5b.png') 0 -814px no-repeat; }
-.cms-menu-list li.current a { background-color: #d8e4eb; }
-.cms-menu-list li.current a .toggle-children .toggle-children-icon { background: url('../images/sprites-32x32-s47450c5f5b.png') 0 -830px no-repeat; }
-.cms-menu-list li.current a .toggle-children.opened .toggle-children-icon { background: url('../images/sprites-32x32-s47450c5f5b.png') 0 -846px no-repeat; }
+.cms-menu-list li.current > a { background-color: #d8e4eb; }
+.cms-menu-list li.current > a .toggle-children .toggle-children-icon { background: url('../images/sprites-32x32-s47450c5f5b.png') 0 -830px no-repeat; }
+.cms-menu-list li.current > a .toggle-children.opened .toggle-children-icon { background: url('../images/sprites-32x32-s47450c5f5b.png') 0 -846px no-repeat; }
 .cms-menu-list li.current ul { border-top: none; display: block; }
-.cms-menu-list li.current li { background-color: #287099; }
-.cms-menu-list li.current li a { font-size: 11px; padding: 0 10px 0 40px; height: 32px; line-height: 32px; color: #e2f0f7; background: none; border-top: 1px solid #2f81b1; border-bottom: 1px solid #1e5270; }
-.cms-menu-list li.current li a.current, .cms-menu-list li.current li a:hover { background: #2e7ead; border-top: 1px solid #2e7ead; color: white; }
-.cms-menu-list li.current li a:focus { background: #236184; border-top: 1px solid #1e5270; color: white; }
-.cms-menu-list li.current li.current { background: #2e7ead; border-top: 1px solid #2e7ead; border-top: none; }
-.cms-menu-list li.current li.current a { font-weight: bold; color: white; }
-.cms-menu-list li.current li.first a { border-top: none; }
+.cms-menu-list li.current li { background-color: #e9f0f4; }
+.cms-menu-list li.current li a:focus, .cms-menu-list li.current li a:hover { background-color: #d8e4eb; }
 .cms-menu-list li ul.collapse { display: none; }
 .cms-menu-list li ul.collapse li a { background-image: none; font-size: 11px; padding: 0 10px 0 40px; height: 32px; line-height: 32px; }
 .cms-menu-list li ul.collapsed-flyout { display: block; }
-.cms-menu-list li ul.collapsed-flyout li a { font-size: 11px; padding: 0 10px 0 16px; height: 32px; line-height: 32px; }
-.cms-menu-list li ul.collapsed-flyout li.current a { font-weight: bold; }
-.cms-menu-list li ul.collapsed-flyout li.first a { border-top: 1px solid #92a5b2; }
+.cms-menu-list li ul.collapsed-flyout li a { background: #e9f0f4; box-shadow: none; font-size: 11px; padding: 10px 0; height: 20px; line-height: 20px; }
+.cms-menu-list li ul.collapsed-flyout li a:hover, .cms-menu-list li ul.collapsed-flyout li a:active { background: #d8e4eb; }
+.cms-menu-list li ul.collapsed-flyout li.current a { font-weight: bold; background-color: #d8e4eb; }
 .cms-menu-list.collapsed li .text, .cms-menu-list.collapsed li .toggle-children { display: none; }
 .cms-menu-list.collapsed li > li { display: none; }
+.cms-menu-list.collapsed .opened ul.collapsed-flyout { border-radius: 0px 2px 2px 0px; border: 1px solid #d2d5d8; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); }
+.cms-menu-list.collapsed .opened ul.collapsed-flyout li.clone a { padding: 15px 0 15px 70px; margin-left: -60px; margin-right: 0px; -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); }
 
 /* -------------------------- */
 .cms-content-controls { /* Styling the background, controls sit on */ /* Styling for icons in controls */ /* Preview selectors. Overrides default chosen styles and applies its own */ }

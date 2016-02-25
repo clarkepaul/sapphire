@@ -1,17 +1,17 @@
 import $ from 'jQuery';
 
 $.entwine('ss', function($){
-	
+
 	/**
-	 * Vertical CMS menu with two levels, built from a nested unordered list. 
+	 * Vertical CMS menu with two levels, built from a nested unordered list.
 	 * The (optional) second level is collapsible, hiding its children.
 	 * The whole menu (including second levels) is collapsible as well,
 	 * exposing only a preview for every menu item in order to save space.
 	 * In this "preview/collapsed" mode, the secondary menu hovers over the menu item,
 	 * rather than expanding it.
-	 * 
+	 *
 	 * Example:
-	 * 
+	 *
 	 * <ul class="cms-menu-list">
 	 *  <li><a href="#">Item 1</a></li>
 	 *  <li class="current opened">
@@ -22,7 +22,7 @@ $.entwine('ss', function($){
 	 *    </ul>
 	 *  </li>
 	 * </ul>
-	 * 
+	 *
 	 * Custom Events:
 	 * - 'select': Fires when a menu item is selected (on any level).
 	 */
@@ -45,9 +45,11 @@ $.entwine('ss', function($){
 						$(this).removeClass('collapse');
 						$(this).data('collapse', true);
 					});
+
 				}
 			});
 
+			// $('.collapsed-flyout').hide();
 			this.toggleFlyoutState(doExpand);
 
 			this._super(doExpand, silent, doSaveState);
@@ -61,6 +63,7 @@ $.entwine('ss', function($){
 				$('.cms-menu-list').find('.child-flyout-indicator').hide();
 			} else {    //collapse
 				//hide the flyout only if it is not the current section
+
 				$('.collapsed-flyout').find('li').each(function() {
 					//if (!$(this).hasClass('current'))
 					$(this).hide();
@@ -210,9 +213,9 @@ $.entwine('ss', function($){
 		updateItems: function() {
 			// Hide "edit page" commands unless the section is activated
 			var editPageItem = this.find('#Menu-CMSMain');
-			
+
 			editPageItem[editPageItem.is('.current') ? 'show' : 'hide']();
-			
+
 			// Update the menu links to reflect the page ID if the page has changed the URL.
 			var currentID = $('.cms-content input[name=ID]').val();
 			if(currentID) {
@@ -230,8 +233,41 @@ $.entwine('ss', function($){
 
 			if (fly.children('ul').first().hasClass('collapsed-flyout')) {
 				if (bool) { //expand
+
+					// create the clone of the list item to be displayed
+					// over the existing one
+					if (
+						!fly.children('ul')
+							.first()
+							.children('li')
+							.first()
+							.hasClass('clone')
+					) {
+
+						var li = fly.clone();
+						li.addClass('clone').css({
+
+						});
+
+						li.children('ul').first().remove();
+
+						li.find('span').not('.text').remove();
+
+						li.find('a').first().unbind('click');
+
+						fly.children('ul').prepend(li);
+					}
+
+					$('.collapsed-flyout').show();
+					fly.addClass('opened');
 					fly.children('ul').find('li').fadeIn('fast');
 				} else {    //collapse
+					if(li) {
+						li.remove();
+					}
+					$('.collapsed-flyout').hide();
+					fly.removeClass('opened');
+					fly.find('toggle-children').removeClass('opened');
 					fly.children('ul').find('li').hide();
 				}
 			}
@@ -239,14 +275,15 @@ $.entwine('ss', function($){
 	});
 	//slight delay to prevent flyout closing from "sloppy mouse movement"
 	$('.cms-menu-list li').hoverIntent(function(){$(this).toggleFlyout(true);},function(){$(this).toggleFlyout(false);});
-	
+
 	$('.cms-menu-list .toggle').entwine({
 		onclick: function(e) {
-			this.getMenuItem().toggle();
+			// this.getMenuItem().toggle();
 			e.preventDefault();
+			$(this).toggleFlyout(true);
 		}
 	});
-	
+
 	$('.cms-menu-list li').entwine({
 		onmatch: function() {
 			if(this.find('ul').length) {
@@ -267,6 +304,9 @@ $.entwine('ss', function($){
 		open: function() {
 			var parent = this.getMenuItem();
 			if(parent) parent.open();
+			if( this.find('li.clone') ) {
+				this.find('li.clone').remove();
+			}
 			this.addClass('opened').find('ul').show();
 			this.find('.toggle-children').addClass('opened');
 		},
@@ -287,13 +327,13 @@ $.entwine('ss', function($){
 				parentSiblings.removeClass('current').close();
 				parentSiblings.find('li').removeClass('current').close();
 			}
-			
+
 			this.getMenu().updateItems();
 
 			this.trigger('select');
 		}
 	});
-	
+
 	$('.cms-menu-list *').entwine({
 		getMenu: function() {
 			return this.parents('.cms-menu-list:first');
@@ -305,7 +345,7 @@ $.entwine('ss', function($){
 			return this.parents('li:first');
 		}
 	});
-	
+
 	/**
 	 * Both primary and secondary nav.
 	 */
@@ -316,26 +356,26 @@ $.entwine('ss', function($){
 			var isExternal = $.path.isExternal(this.attr('href'));
 			if(e.which > 1 || isExternal) return;
 
-			// if the developer has this to open in a new window, handle 
+			// if the developer has this to open in a new window, handle
 			// that
 			if(this.attr('target') == "_blank") {
 				return;
 			}
-			
+
 			e.preventDefault();
 
 			var item = this.getMenuItem();
 
 			var url = this.attr('href');
 			if(!isExternal) url = $('base').attr('href') + url;
-			
+
 			var children = item.find('li');
 			if(children.length) {
 				children.first().find('a').click();
 			} else {
 				// Load URL, but give the loading logic an opportunity to veto the action
 				// (e.g. because of unsaved changes)
-				if(!$('.cms-container').loadPanel(url)) return false;	
+				if(!$('.cms-container').loadPanel(url)) return false;
 			}
 
 			item.select();
@@ -353,7 +393,7 @@ $.entwine('ss', function($){
 	$('.cms .profile-link').entwine({
 		onclick: function() {
 			$('.cms-container').loadPanel(this.attr('href'));
-			$('.cms-menu-list li').removeClass('current').close(); 
+			$('.cms-menu-list li').removeClass('current').close();
 			return false;
 		}
 	});

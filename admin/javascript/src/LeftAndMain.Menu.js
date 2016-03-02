@@ -205,6 +205,14 @@ $.entwine('ss', function($){
 			ontoggle: function(e){
 				this.toggleClass('collapsed', $(e.target).hasClass('collapsed'));
 				$(window).resize(); //Trigger jLayout
+
+				//If panel is closing
+				if (this.hasClass('collapsed')) this.find('li.children.opened').removeClass('opened');
+
+				//If panel is opening
+				if(!this.hasClass('collapsed')) {
+					$('.toggle-children.opened').closest('li').addClass('opened');
+				}
 			}
 		},
 
@@ -231,8 +239,40 @@ $.entwine('ss', function($){
 
 			if (fly.children('ul').first().hasClass('collapsed-flyout')) {
 				if (bool) { //expand
+					// create the clone of the list item to be displayed
+					// over the existing one
+					if (
+						!fly.children('ul')
+							.first()
+							.children('li')
+							.first()
+							.hasClass('clone')
+					) {
+
+						var li = fly.clone();
+						li.addClass('clone').css({
+
+						});
+
+						li.children('ul').first().remove();
+
+						li.find('span').not('.text').remove();
+
+						li.find('a').first().unbind('click');
+
+						fly.children('ul').prepend(li);
+					}
+
+					$('.collapsed-flyout').show();
+					fly.addClass('opened');
 					fly.children('ul').find('li').fadeIn('fast');
 				} else {    //collapse
+					if(li) {
+						li.remove();
+					}
+					$('.collapsed-flyout').hide();
+					fly.removeClass('opened');
+					fly.find('toggle-children').removeClass('opened');
 					fly.children('ul').find('li').hide();
 				}
 			}
@@ -243,8 +283,8 @@ $.entwine('ss', function($){
 
 	$('.cms-menu-list .toggle').entwine({
 		onclick: function(e) {
-			this.getMenuItem().toggle();
 			e.preventDefault();
+			$(this).toogleFlyout(true);
 		}
 	});
 
@@ -268,6 +308,9 @@ $.entwine('ss', function($){
 		open: function() {
 			var parent = this.getMenuItem();
 			if(parent) parent.open();
+			if( this.find('li.clone') ) {
+				this.find('li.clone').remove();
+			}
 			this.addClass('opened').find('ul').show();
 			this.find('.toggle-children').addClass('opened');
 		},

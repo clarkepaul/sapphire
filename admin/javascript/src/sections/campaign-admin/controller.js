@@ -6,6 +6,7 @@ import GridFieldHeader from '../../components/grid-field-header';
 import GridFieldHeaderCell from '../../components/grid-field-header-cell';
 import GridFieldRow from '../../components/grid-field-row';
 import GridFieldCell from '../../components/grid-field-cell';
+import Action from '../../components/action';
 
 class CampaignAdminContainer extends SilverStripeComponent {
 
@@ -49,8 +50,29 @@ class CampaignAdminContainer extends SilverStripeComponent {
 
         return (
             <div>
-                <NorthHeader></NorthHeader>
-                <GridField header={header} rows={rows}></GridField>
+                <NorthHeader />
+                <Action text={'Add campaign'} type={'secondary'} icon={'plus-circled'}/>
+                <GridField header={header} rows={rows} />
+                <Action text={'Save'} type={'success'} icon={'icon-upload'}/>
+                <Action text={'Delete'} type={'link'} />
+
+                <div className='btn-group'>
+                    <Action text={'Save'} type={'success'} icon={'upload'}/>
+                    <Action text={'Publish'} type={'success'} icon={'rocket'}/>
+                </div>
+
+                <div className='btn-group'>
+                    <Action text={'Saved'} type={'complete'} icon={'tick'}/>
+                    <Action text={'Publish'} type={'success'} icon={'rocket'}/>
+                </div>
+
+                <Action text={''} type={'success'} icon={'plus'}/>
+
+                <div className='btn-group'>
+                    <Action text={'Saved'} type={'complete'} icon={'tick'} />
+                    <Action text={'Published'} type={'complete'} icon={'tick'}/>
+                </div>
+
             </div>
         );
     }

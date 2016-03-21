@@ -1,0 +1,60 @@
+// General buttons
+.btn {
+	height: 32px;
+	margin-right: 1rem;
+
+	&.btn-success {
+		border-bottom-color: $btn-success-shadow;
+	}
+
+	&.btn-link {
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	&.btn-secodary {
+		border-color: transparent;
+	}
+}
+
+// Button icons
+.btn[class*="font-icon-"]::before {
+	font-size: 16px;
+	position: relative;
+	top: 3px;
+	margin-right: 6px;
+	line-height: 13px;
+}
+
+.no-text[class*="font-icon-"]::before {
+	margin-right: 0;
+}
+
+.btn-group {
+	margin-right: 1rem;
+
+	.btn {
+		margin-right: 0;
+	}
+
+	.btn-success {
+		border-left: 1px solid darken($btn-success-bg, 6%);
+
+		&:first-child {
+			border-left: none;
+		}
+	}
+}
+
+// Specific button types
+.btn-secondary {
+	&:hover {
+		background-color: $gray-lighter;
+	}
+}
+
+.btn-success-outline {
+	border-color: lighten($brand-success,10%);
+}
+
